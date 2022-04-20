@@ -25,7 +25,6 @@ public class DentistController {
     public ResponseEntity<DentistDTO> findById(@PathVariable Integer id) {
         return ResponseEntity.ok().body(dentistService.findById(id));
     }
-
     @PostMapping("/add")
     public ResponseEntity<DentistDTO> addDentist(@Valid @RequestBody DentistDTO dentistDTO) {
         return ResponseEntity.ok().body(dentistService.save(dentistDTO));

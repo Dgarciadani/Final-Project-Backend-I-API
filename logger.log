@@ -7,3 +7,6 @@
 [2022-04-18 15:00:38] [ ERROR] [GlobalExceptionHandler:&L] Cannot invoke "com.grego.Final_Project_Refactor_clase24.dto.DentistDTO.getDentist_id()" because the return value of "com.grego.Final_Project_Refactor_clase24.dto.AppointmentDTO.getDentist()" is null
 [2022-04-18 15:00:42] [ ERROR] [GlobalExceptionHandler:&L] could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
 [2022-04-18 15:00:56] [ ERROR] [GlobalExceptionHandler:&L] could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+[2022-04-20 14:03:46] [ ERROR] [GlobalExceptionHandler:&L] Content type 'application/x-www-form-urlencoded;charset=UTF-8' not supported
+[2022-04-20 14:06:31] [ ERROR] [GlobalExceptionHandler:&L] Bad credentials
+[2022-04-20 14:25:16] [ ERROR] [GlobalExceptionHandler:&L] could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement

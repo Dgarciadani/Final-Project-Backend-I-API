@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/patient")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*" , methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 public class PatientController {
     private final static Logger logger = org.apache.logging.log4j.LogManager.getLogger(PatientController.class);
     @Autowired
