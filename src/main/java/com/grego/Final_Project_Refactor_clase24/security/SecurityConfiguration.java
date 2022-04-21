@@ -38,6 +38,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 
+/*    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                *//*    .authorizeHttpRequests()
+                  .antMatchers("/user/**")
+                  .permitAll()
+                  .anyRequest()
+                  .authenticated().and()
+                  .formLogin().and()
+                  .httpBasic();*//*
+                .authorizeRequests()
+                .antMatchers("/dentists/*","/patients/*" ).hasAuthority("ADMIN")
+                /.antMatch*/
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());
