@@ -5,6 +5,7 @@ import com.grego.Final_Project_Refactor_clase24.services.impl.login.AppUserServi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,7 +26,46 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
+    /* -------by me-------
     @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/auth/login/**").permitAll()
+        *//*        .antMatchers(HttpMethod.GET, "/patient/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/dentist/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/appointment/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/dentist/**").hasRole("ADMIN")
+                .anyRequest()
+                .authenticated()
+                .and()
+                .httpBasic()
+                .and()
+                .formLogin().loginPage("/login")
+                .and().logout();*//*
+    }*/
+
+
+   /* @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .authorizeRequests()
+
+
+                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/patient/**").hasAuthority("USER")
+                .antMatchers("/dentist/**").hasAuthority("USER")
+                .antMatchers("/appointment/**").hasAuthority("USER")
+                .and().formLogin().loginPage("/login")
+                .and().logout();
+
+
+    }*/
+
+
+ //  ------ Other By me ------
+   @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
@@ -38,19 +78,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 
-/*    @Override
+    /* ------ by pablo-------
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                *//*    .authorizeHttpRequests()
-                  .antMatchers("/user/**")
-                  .permitAll()
-                  .anyRequest()
-                  .authenticated().and()
-                  .formLogin().and()
-                  .httpBasic();*//*
                 .authorizeRequests()
-                .antMatchers("/dentists/*","/patients/*" ).hasAuthority("ADMIN")
-                /.antMatch*/
+                .antMatchers("/dentist/**", "/patient/**", "/appointment/** ")
+                .hasAuthority("ROLE_ADMIN")
+                .antMatchers("/patient/")
+                .hasAuthority("ROLE_USER")
+                .and()
+                .httpBasic()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/auth/login")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll();
+    }*/
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -64,6 +114,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         daoAuthenticationProvider.setUserDetailsService(appUserService);
         return daoAuthenticationProvider;
     }
+
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {

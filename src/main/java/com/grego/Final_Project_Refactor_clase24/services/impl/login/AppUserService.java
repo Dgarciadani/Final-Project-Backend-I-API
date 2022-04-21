@@ -41,7 +41,7 @@ public class AppUserService implements UserDetailsService {
         } else {
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
             AppUser newUser = mapToEntity(appUser);
-            newUser.setAppUserRoles(AppUserRoles.ROLE_USER);
+            newUser.setAppUserRoles(AppUserRoles.USER);
             String newPass = bCryptPasswordEncoder.encode(appUser.getPassword());
             newUser.setPassword(newPass);
             appUserRepository.save(newUser);

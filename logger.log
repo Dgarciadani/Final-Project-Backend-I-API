@@ -11,3 +11,6 @@
 [2022-04-20 14:06:31] [ ERROR] [GlobalExceptionHandler:&L] Bad credentials
 [2022-04-20 14:25:16] [ ERROR] [GlobalExceptionHandler:&L] could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
 [2022-04-21 00:22:46] [ ERROR] [AppUserService:&L] User already exists
+[2022-04-21 09:54:13] [ ERROR] [AppUserService:&L] User already exists
+[2022-04-21 12:24:33] [ ERROR] [GlobalExceptionHandler:&L] Request method 'GET' not supported
+[2022-04-21 12:24:41] [ ERROR] [GlobalExceptionHandler:&L] Request method 'GET' not supported
