@@ -28,8 +28,8 @@ public class AppUserService implements UserDetailsService {
 
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return appUserRepository.findByEmailOrUsername(email).orElseThrow((() -> new UsernameNotFoundException("User or email not found")));
+    public UserDetails loadUserByUsername(String emailOrUsername) throws UsernameNotFoundException {
+        return appUserRepository.findByEmailOrUsername(emailOrUsername).orElseThrow((() -> new UsernameNotFoundException("User or email not found")));
     }
 
     public void registerUser(AppUserDTO appUser) {

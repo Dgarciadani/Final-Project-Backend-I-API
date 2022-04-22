@@ -15,3 +15,5 @@
 [2022-04-21 12:24:33] [ ERROR] [GlobalExceptionHandler:&L] Request method 'GET' not supported
 [2022-04-21 12:24:41] [ ERROR] [GlobalExceptionHandler:&L] Request method 'GET' not supported
 [2022-04-21 16:54:20] [ ERROR] [GlobalExceptionHandler:&L] Incorrect
+[2022-04-22 19:35:06] [ ERROR] [AppUserService:&L] User already exists
+[2022-04-22 19:35:54] [ ERROR] [GlobalExceptionHandler:&L] Incorrect

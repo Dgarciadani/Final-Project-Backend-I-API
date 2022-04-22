@@ -1,6 +1,8 @@
 package com.grego.Final_Project_Refactor_clase24.security.jwt;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +12,7 @@ import java.util.Map;
 @Component
 public class JwtTokenUtil {
 
-    private String SECRET_KEY = "secret";
+    private String SECRET_KEY = "supersecretkey";
 
     public String extractUserName(String token) {
         return extractClaimUsername(token);
@@ -27,7 +29,7 @@ public class JwtTokenUtil {
     }
 
     private Claims extractAllClaims(String token) {
-        return io.jsonwebtoken.Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
 
     public String generateToken(UserDetails userDetails) {
@@ -36,10 +38,10 @@ public class JwtTokenUtil {
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
-        return io.jsonwebtoken.Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 //Here we set the expiration time of the token to 24 hours ( 3.600.000 milliseconds * 24 = 86.400.000 = 24 hours)
-                .setExpiration(new Date(System.currentTimeMillis() + (36000000*24)))
-                .signWith(io.jsonwebtoken.SignatureAlgorithm.HS256, SECRET_KEY).compact();
+                .setExpiration(new Date(System.currentTimeMillis() + 10000 * 24 * 60 * 60))
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
