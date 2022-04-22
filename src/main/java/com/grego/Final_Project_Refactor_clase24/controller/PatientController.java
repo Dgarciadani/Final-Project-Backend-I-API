@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/patient")
-@CrossOrigin(origins = "*" , methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 public class PatientController {
     private final static Logger logger = org.apache.logging.log4j.LogManager.getLogger(PatientController.class);
     @Autowired
@@ -19,38 +19,45 @@ public class PatientController {
 
     @GetMapping("/id={id}")
     public ResponseEntity<PatientDTO> findById(@PathVariable Integer id) {
+        logger.info("Patient id: " + id);
         return ResponseEntity.ok(patientService.findById(id));
     }
 
     @PostMapping("/add")
     public ResponseEntity<PatientDTO> savePatient(@RequestBody PatientDTO patientDTO) {
+        logger.info("Adding Patient: " + patientDTO);
         return ResponseEntity.ok(patientService.save(patientDTO));
     }
 
     @PutMapping("/id={id}")
     public ResponseEntity<PatientDTO> updatePatient(@PathVariable Integer id, @RequestBody PatientDTO patientDTO) {
+        logger.info("Updating Patient: " + id);
         return ResponseEntity.ok(patientService.update(id, patientDTO));
     }
 
     @DeleteMapping("/id={id}")
     public ResponseEntity<String> deletePatient(@PathVariable Integer id) {
         patientService.deleteById(id);
+        logger.info("Deleting Patient: " + id);
         return ResponseEntity.ok().body("Patient deleted");
-        //HABRIA QUE REFACTORIZAR PARA OPTENER UNA RESPUESTA DE DELETE
+
     }
 
     @GetMapping("/all")
     public ResponseEntity<Iterable<PatientDTO>> findAll() {
+        logger.info("Getting all patients");
         return ResponseEntity.ok(patientService.findAll());
     }
 
     @GetMapping("/name={name}")
     public ResponseEntity<Iterable<PatientDTO>> findByName(@PathVariable String name) {
+        logger.info("Getting all patients with name: " + name);
         return ResponseEntity.ok(patientService.findByName(name));
     }
 
     @GetMapping("/email={email}")
     public ResponseEntity<PatientDTO> findByEmail(@PathVariable String email) {
+        logger.info("Getting patient with email: " + email);
         return ResponseEntity.ok(patientService.findByEmail(email));
     }
 }

@@ -1,6 +1,4 @@
 package com.grego.Final_Project_Refactor_clase24.services.impl.login;
-
-
 import com.grego.Final_Project_Refactor_clase24.dto.AppUserDTO;
 import com.grego.Final_Project_Refactor_clase24.repository.login.AppUserRepository;
 import com.grego.Final_Project_Refactor_clase24.security.AppUser;
@@ -31,7 +29,7 @@ public class AppUserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return appUserRepository.findByEmail(email).orElseThrow((() -> new UsernameNotFoundException("User email not found")));
+        return appUserRepository.findByEmailOrUsername(email).orElseThrow((() -> new UsernameNotFoundException("User or email not found")));
     }
 
     public void registerUser(AppUserDTO appUser) {

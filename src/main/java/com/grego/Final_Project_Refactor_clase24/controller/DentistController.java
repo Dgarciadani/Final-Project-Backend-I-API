@@ -18,31 +18,37 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*")
 public class DentistController {
     private final static Logger logger = org.apache.logging.log4j.LogManager.getLogger(DentistController.class);
+
     @Autowired
     private IDentistService dentistService;
 
     @GetMapping("/id={id}")
     public ResponseEntity<DentistDTO> findById(@PathVariable Integer id) {
+        logger.info("find Dentist by id"+ id);
         return ResponseEntity.ok().body(dentistService.findById(id));
     }
     @PostMapping("/add")
     public ResponseEntity<DentistDTO> addDentist(@Valid @RequestBody DentistDTO dentistDTO) {
+        logger.info("add Dentist");
         return ResponseEntity.ok().body(dentistService.save(dentistDTO));
     }
 
     @PutMapping("id={id}")
     public ResponseEntity<DentistDTO> updateDentist(@PathVariable Integer id, @Valid @RequestBody DentistDTO dentistDTO) {
+        logger.info("update Dentist with id: " + id);
         return ResponseEntity.ok().body(dentistService.update(id, dentistDTO));
     }
 
     @DeleteMapping("/id={id}")
     public ResponseEntity<String> deleteDentist(@PathVariable Integer id) {
         dentistService.deleteById(id);
+        logger.info("deleted Dentist with id: " + id);
         return ResponseEntity.ok().body("Dentist deleted");
     }
 
     @GetMapping("/all")
     public ResponseEntity<Iterable<DentistDTO>> getAllDentists() {
+        logger.info("get all Dentists");
         return ResponseEntity.ok().body(dentistService.findAll());
     }
 }
