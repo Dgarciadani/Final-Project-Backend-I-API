@@ -70,15 +70,28 @@ public class AppointmentController {
 
     @DeleteMapping("/dentist={id}")
     public ResponseEntity<String> deleteAppointmentByDentistId(@PathVariable Integer id) {
-        logger.info("Deleting appointment by dentist id: " + id);
-        appointmentService.deleteByDentistId(id);
-        return ResponseEntity.ok().body("Appointments deleted");
+        try {
+            logger.info("Deleting appointment by dentist id: " + id);
+            appointmentService.deleteByDentistId(id);
+            return ResponseEntity.ok().body("Appointments deleted");
+        }
+        catch (Exception e) {
+            logger.error("Appointment not found");
+            return ResponseEntity.notFound().build();
+        }
+
     }
 @DeleteMapping("/patient={id}")
     public ResponseEntity<String> deleteAppointmentByPatientId(@PathVariable Integer id) {
+        try{
         logger.info("Deleting appointment by patient id: " + id);
         appointmentService.deleteByPatientId(id);
-        return ResponseEntity.ok().body("Appointments deleted");
+        return ResponseEntity.ok().body("Appointments deleted");}
+        catch (Exception e) {
+            logger.error("Appointment not found");
+            return ResponseEntity.notFound().build();
+
+        }
     }
 
 }

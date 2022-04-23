@@ -24,6 +24,10 @@ public class DentistController {
 
     @GetMapping("/id={id}")
     public ResponseEntity<DentistDTO> findById(@PathVariable Integer id) {
+        if (dentistService.findById(id) == null) {
+            logger.info("Dentist with id: " + id + " not found");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         logger.info("find Dentist by id"+ id);
         return ResponseEntity.ok().body(dentistService.findById(id));
     }

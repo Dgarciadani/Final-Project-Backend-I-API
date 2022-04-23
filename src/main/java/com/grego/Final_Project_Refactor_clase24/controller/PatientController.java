@@ -19,8 +19,14 @@ public class PatientController {
 
     @GetMapping("/id={id}")
     public ResponseEntity<PatientDTO> findById(@PathVariable Integer id) {
-        logger.info("Patient id: " + id);
-        return ResponseEntity.ok(patientService.findById(id));
+        if (patientService.findById(id) != null) {
+            logger.info("Patient id: " + id);
+            return ResponseEntity.ok(patientService.findById(id));
+        } else {
+            logger.info("Patient id: " + id + " not found");
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
     @PostMapping("/add")
