@@ -17,3 +17,9 @@
 [2022-04-21 16:54:20] [ ERROR] [GlobalExceptionHandler:&L] Incorrect
 [2022-04-22 19:35:06] [ ERROR] [AppUserService:&L] User already exists
 [2022-04-22 19:35:54] [ ERROR] [GlobalExceptionHandler:&L] Incorrect
+[2022-04-23 00:08:22] [ ERROR] [GlobalExceptionHandler:&L] Patient id 212
+[2022-04-23 01:26:13] [ ERROR] [AppUserService:&L] User already exists
+[2022-04-23 01:27:59] [ ERROR] [AppUserService:&L] User already exists
+[2022-04-23 01:28:08] [ ERROR] [AppUserService:&L] User already exists
+[2022-04-23 01:28:23] [ ERROR] [AppUserService:&L] User already exists
+[2022-04-23 01:28:39] [ ERROR] [AppUserService:&L] User already exists

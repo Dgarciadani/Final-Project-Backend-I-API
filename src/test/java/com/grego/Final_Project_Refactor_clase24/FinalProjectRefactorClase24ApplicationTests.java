@@ -4,6 +4,7 @@ import com.grego.Final_Project_Refactor_clase24.dto.AddressDTO;
 import com.grego.Final_Project_Refactor_clase24.dto.AppointmentDTO;
 import com.grego.Final_Project_Refactor_clase24.dto.DentistDTO;
 import com.grego.Final_Project_Refactor_clase24.dto.PatientDTO;
+import com.grego.Final_Project_Refactor_clase24.exceptions.ResourceNotFoundException;
 import com.grego.Final_Project_Refactor_clase24.services.impl.AppointmentService;
 import com.grego.Final_Project_Refactor_clase24.services.impl.DentistService;
 import com.grego.Final_Project_Refactor_clase24.services.impl.PatientService;
@@ -69,12 +70,12 @@ class FinalProjectRefactorClase24ApplicationTests {
     }
 
     @Test
-    public void getPatient() {
+    public void getPatient() throws ResourceNotFoundException {
         Assertions.assertNotNull(patientService.findById(1));
     }
 
     @Test
-    public void getDentist() {
+    public void getDentist() throws ResourceNotFoundException {
         Assertions.assertNotNull(dentistService.findById(1));
     }
 
@@ -107,7 +108,7 @@ class FinalProjectRefactorClase24ApplicationTests {
     }
 
     @Test
-    public void updatePatient() {
+    public void updatePatient() throws ResourceNotFoundException {
         PatientDTO patientdto = new PatientDTO();
         patientdto.setName("Pedro");
         patientdto.setLastName("Perez");
@@ -135,7 +136,7 @@ class FinalProjectRefactorClase24ApplicationTests {
         public void deleteAppointment() {
         }*/
     @Test
-    public void deletePatient() {
+    public void deletePatient() throws ResourceNotFoundException {
         patientService.deleteById(2);
         Assertions.assertNull(patientService.findById(2));
     }

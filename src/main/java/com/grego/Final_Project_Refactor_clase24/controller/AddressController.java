@@ -1,6 +1,7 @@
 package com.grego.Final_Project_Refactor_clase24.controller;
 
 import com.grego.Final_Project_Refactor_clase24.dto.AddressDTO;
+import com.grego.Final_Project_Refactor_clase24.exceptions.ResourceNotFoundException;
 import com.grego.Final_Project_Refactor_clase24.services.impl.AddressService;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ private final static Logger logger = org.apache.logging.log4j.LogManager.getLogg
     }
 
     @DeleteMapping("/id={id}")
-    public ResponseEntity<String> deleteAddress(@PathVariable Integer id) {
+    public ResponseEntity<String> deleteAddress(@PathVariable Integer id) throws ResourceNotFoundException {
         addressService.deleteById(id);
         logger.info("Deleting address with id: " + id);
         return ResponseEntity.ok().body("Address deleted");

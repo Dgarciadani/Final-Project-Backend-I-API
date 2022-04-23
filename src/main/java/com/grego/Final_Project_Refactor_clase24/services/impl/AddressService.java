@@ -2,6 +2,7 @@ package com.grego.Final_Project_Refactor_clase24.services.impl;
 
 import com.grego.Final_Project_Refactor_clase24.domain.Address;
 import com.grego.Final_Project_Refactor_clase24.dto.AddressDTO;
+import com.grego.Final_Project_Refactor_clase24.exceptions.ResourceNotFoundException;
 import com.grego.Final_Project_Refactor_clase24.repository.AddressRepository;
 import com.grego.Final_Project_Refactor_clase24.services.IAddressService;
 import org.modelmapper.ModelMapper;
@@ -32,9 +33,15 @@ public class AddressService implements IAddressService {
     }
 
     @Override
-    public void deleteById(Integer id) {
-        //WTF UNA ARROW FUNCTION
-        addressRepository.findById(id).ifPresent(address -> addressRepository.deleteById(id));
+    public void deleteById(Integer id) throws ResourceNotFoundException {
+        try {
+            addressRepository.findById(id).ifPresent(address -> addressRepository.deleteById(id));
+        }
+        catch (Exception e) {
+            ResourceNotFoundException resourceNotFoundException = new ResourceNotFoundException("Address"+ "id", id);
+            throw resourceNotFoundException;
+        }
+
     }
 
     @Override

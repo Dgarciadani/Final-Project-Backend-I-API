@@ -21,13 +21,16 @@ public class PatientService implements IPatientService {
     private ModelMapper modelmapper;
 
     @Override
-    public PatientDTO findById(Integer id) {
-       // return patientRepository.findById(id).map(this::mapToDTO).orElseThrow(() -> new ResourceNotFoundException("Patient", "id", id));
-        return patientRepository.findById(id).map(this::mapToDTO).orElse(null);
+    public PatientDTO findById(Integer id) throws ResourceNotFoundException {
+        return patientRepository.findById(id).map(this::mapToDTO).orElseThrow(() -> new ResourceNotFoundException("Patient id " , id));
     }
+        //return patientRepository.findById(id).map(this::mapToDTO).orElse(null);
+
+
 
     @Override
     public PatientDTO save(PatientDTO entity) {
+
         Patient patient = mapToEntity(entity);
         patient = patientRepository.save(patient);
         return mapToDTO(patient);
@@ -39,11 +42,16 @@ public class PatientService implements IPatientService {
     }
 
     @Override
-    public PatientDTO update(Integer id, PatientDTO entity) {
-        Patient patient = mapToEntity(entity);
-        patient.setPatient_id(id);
-        patient = patientRepository.save(patient);
-        return mapToDTO(patient);
+    public PatientDTO update(Integer id, PatientDTO entity) throws ResourceNotFoundException {
+        if (patientRepository.findById(id).isPresent()) {
+            Patient patient = mapToEntity(entity);
+            patient.setPatient_id(id);
+            patient = patientRepository.save(patient);
+            return mapToDTO(patient);
+        } else {
+            throw new ResourceNotFoundException("Patient id " + id);
+        }
+
     }
 
     @Override

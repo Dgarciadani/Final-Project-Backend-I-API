@@ -49,6 +49,9 @@ public class AppointmentService implements IAppointmentService {
 
     @Override
     public List<AppointmentDTO> findAll() {
+        if (appointmentRepository.findAll().isEmpty()) {
+            return null;
+        }
         return appointmentRepository.findAll().stream().map(this::mapToDTO).collect(java.util.stream.Collectors.toList());
     }
     public List<AppointmentDTO> findByPatientId(Integer id){

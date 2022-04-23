@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grego.Final_Project_Refactor_clase24.domain.Address;
 import com.grego.Final_Project_Refactor_clase24.domain.Dentist;
 import com.grego.Final_Project_Refactor_clase24.dto.DentistDTO;
+import com.grego.Final_Project_Refactor_clase24.exceptions.ResourceNotFoundException;
 import com.grego.Final_Project_Refactor_clase24.repository.DentistRepository;
 import com.grego.Final_Project_Refactor_clase24.services.IDentistService;
 import org.modelmapper.ModelMapper;
@@ -24,20 +25,26 @@ public class DentistService implements IDentistService {
     private ModelMapper modelmapper;
 
     @Override
-    public DentistDTO findById(Integer id) {
-        return dentistRepository.findById(id).map(this::mapToDTO).orElse(null);
+    public DentistDTO findById(Integer id) throws ResourceNotFoundException {
+        Optional<Dentist> optionalDentist = dentistRepository.findById(id);
+        return optionalDentist.map(this::mapToDTO).orElse(null);
     }
 
     @Override
     public DentistDTO save(DentistDTO entity) {
+
         Dentist dentist = mapToEntity(entity);
         dentist = dentistRepository.save(dentist);
         return mapToDTO(dentist);
     }
 
     @Override
-    public void deleteById(Integer id) {
-        dentistRepository.findById(id).ifPresent(dentist -> dentistRepository.delete(dentist));
+    public void deleteById(Integer id) throws ResourceNotFoundException {
+        if (dentistRepository.existsById(id)) {
+            dentistRepository.findById(id).ifPresent(dentist -> dentistRepository.delete(dentist));
+        } else {
+            throw new ResourceNotFoundException("Dentist with id: ", id);
+        }
     }
 
     @Override
@@ -50,6 +57,9 @@ public class DentistService implements IDentistService {
 
     @Override
     public List<DentistDTO> findAll() {
+        if (dentistRepository.findAll().isEmpty()) {
+            return null;
+        }
         return dentistRepository.findAll().stream().map(this::mapToDTO).collect(java.util.stream.Collectors.toList());
     }
 

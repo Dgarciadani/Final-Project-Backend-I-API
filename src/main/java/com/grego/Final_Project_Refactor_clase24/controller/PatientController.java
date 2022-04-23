@@ -2,6 +2,7 @@ package com.grego.Final_Project_Refactor_clase24.controller;
 
 
 import com.grego.Final_Project_Refactor_clase24.dto.PatientDTO;
+import com.grego.Final_Project_Refactor_clase24.exceptions.ResourceNotFoundException;
 import com.grego.Final_Project_Refactor_clase24.services.impl.PatientService;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class PatientController {
 
 
     @GetMapping("/id={id}")
-    public ResponseEntity<PatientDTO> findById(@PathVariable Integer id) {
+    public ResponseEntity<PatientDTO> findById(@PathVariable Integer id) throws ResourceNotFoundException {
         if (patientService.findById(id) != null) {
             logger.info("Patient id: " + id);
             return ResponseEntity.ok(patientService.findById(id));
@@ -36,7 +37,7 @@ public class PatientController {
     }
 
     @PutMapping("/id={id}")
-    public ResponseEntity<PatientDTO> updatePatient(@PathVariable Integer id, @RequestBody PatientDTO patientDTO) {
+    public ResponseEntity<PatientDTO> updatePatient(@PathVariable Integer id, @RequestBody PatientDTO patientDTO) throws ResourceNotFoundException {
         logger.info("Updating Patient: " + id);
         return ResponseEntity.ok(patientService.update(id, patientDTO));
     }
