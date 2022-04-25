@@ -100,7 +100,7 @@ class FinalProjectRefactorClase24ApplicationTests {
         PatientDTO patient = new PatientDTO();
         patient.setPatient_id(1);
         DentistDTO dentist = new DentistDTO();
-        dentist.setDentist_id(3);
+        dentist.setDentist_id(1);
         appointmentDTO.setPatient(patient);
         appointmentDTO.setDentist(dentist);
         appointmentDTO.setDate(new java.sql.Date(new java.util.Date().getTime()));
@@ -137,7 +137,18 @@ class FinalProjectRefactorClase24ApplicationTests {
         }*/
     @Test
     public void deletePatient() throws ResourceNotFoundException {
-        patientService.deleteById(2);
-        Assertions.assertNull(patientService.findById(2));
+        PatientDTO patientdto = new PatientDTO();
+        patientdto.setName("Pedro");
+        patientdto.setLastName("Perez");
+        AddressDTO address = new AddressDTO();
+        address.setCity("Ciudad");
+        address.setStreet("Calle");
+        address.setDoor(123);
+        address.setState("Estado");
+        patientdto.setAddress(address);
+        patientdto.setDni(123456789);
+        patientdto.setDateInit(new java.sql.Date(new java.util.Date().getTime()));
+        patientService.save(patientdto);
+        patientService.deleteById(1);
     }
 }

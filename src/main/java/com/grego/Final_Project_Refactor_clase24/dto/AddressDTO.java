@@ -20,4 +20,11 @@ public class AddressDTO {
 
     public AddressDTO() {
     }
+
+    public AddressDTO(String street, Integer door, String city, String state) {
+        this.street = street;
+        this.door = door;
+        this.city = city;
+        this.state = state;
+    }
 }

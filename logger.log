@@ -23,3 +23,5 @@
 [2022-04-23 01:28:08] [ ERROR] [AppUserService:&L] User already exists
 [2022-04-23 01:28:23] [ ERROR] [AppUserService:&L] User already exists
 [2022-04-23 01:28:39] [ ERROR] [AppUserService:&L] User already exists
+[2022-04-23 20:39:20] [ ERROR] [GlobalExceptionHandler:&L] Patient id 1
+[2022-04-23 20:39:26] [ ERROR] [GlobalExceptionHandler:&L] Patient id 1
