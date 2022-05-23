@@ -30,6 +30,7 @@ public class AuthController {
 
     @Autowired
     private AppUserService appUserService;
+
     @Autowired
     private JwtTokenUtil jwtUtil;
 
